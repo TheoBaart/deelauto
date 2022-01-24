@@ -21,7 +21,7 @@
 title: Deelauto Tool
 description: >- # this means to ignore newlines until "baseurl:"
   Project om te zien wat een deelauto nu kost.
-#baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "deelauto" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  TheoBaart
 

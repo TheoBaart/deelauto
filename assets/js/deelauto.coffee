@@ -2,4 +2,4 @@
 ---
 $ -> 
   $('#test_button').click ->
-        alert('hello')
+        alert('hello world')

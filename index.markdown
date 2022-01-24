@@ -4,3 +4,11 @@
 
 layout: home
 ---
+<script type = "text/javascript"
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="/assets/js/testscript.js"></script>
+
+Dit is iets heel simple. 
+
+<button id="test_button">Click</button>

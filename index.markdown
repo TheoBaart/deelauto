@@ -10,8 +10,8 @@ layout: home
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
 Dit is iets heel simple. Nu iets meer
-
-<form>
+{::nomarkdown}
+<form id="journey_form">
     <div>
         <label for="journey_km">Rit afstand (kilometers): </label>
         <input type="number" id="journey_km" name=" journey_km", min="1" required>
@@ -20,6 +20,7 @@ Dit is iets heel simple. Nu iets meer
         <input type="number" id="journey_min" name=" journey_min", min="1" required>
     </div>
     <div>
-        <input type="submit" id="journey_button">
+        <input type="submit">
     </div>
 </form>
+{:/}

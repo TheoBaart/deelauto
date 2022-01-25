@@ -9,7 +9,7 @@ layout: home
 
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
-Dit is iets heel simple. Nu iets minder
+Dit is iets heel simple. Nu iets meer
 
 <form>
     <div>

@@ -13,9 +13,11 @@ Dit is iets heel simple. Nu iets minder
 
 <form>
     <div>
-        <label for="journey_km">Rit afstand (kilometers): </label><input type="number" id="journey_km" name=" journey_km", min="1">
+        <label for="journey_km">Rit afstand (kilometers): </label>
+        <input type="number" id="journey_km" name=" journey_km", min="1" required>
         <br>
-        <label for="journey_min">Rit duur (minuten): </label><input type="number" id="journey_min" name=" journey_min", min="1">
+        <label for="journey_min">Rit duur (minuten): </label>
+        <input type="number" id="journey_min" name=" journey_min", min="1" required>
     </div>
     <div>
         <input type="submit" id="journey_button">

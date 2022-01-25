@@ -4,13 +4,14 @@
 
 layout: home
 ---
+
 <script type = "text/javascript"
          src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
 Dit is iets heel simple. Nu iets meer
-{::nomarkdown}
+<!-- {% raw %} -->
 <form id="journey_form">
     <div>
         <label for="journey_km">Rit afstand (kilometers): </label>
@@ -23,4 +24,4 @@ Dit is iets heel simple. Nu iets meer
         <input type="submit">
     </div>
 </form>
-{:/}
+<!-- {% endraw %} -->

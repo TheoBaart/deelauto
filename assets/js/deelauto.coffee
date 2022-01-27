@@ -26,6 +26,8 @@
 #     return remaining_time
 
 # initiate interactivity!
-$ -> 
-  $('#journey_button').click ->
-        alert('hello journey & PriceModel!')
+$(document).ready -> 
+  $('#journey_form').submit ->
+        kilometers = parseInt($('#journey_kilometers').val(),10)
+        minutes = parseInt($('#journey_minutes').val(),10)
+        alert('kilometers = '+kilometers+' minutes = '+minutes)

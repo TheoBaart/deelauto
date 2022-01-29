@@ -5,6 +5,8 @@
 layout: home
 ---
 
+<link rel="shortcut icon" type="image/x-icon" href="{{ "/assets/favicon.ico" | relative_url }}">
+
 <script type = "text/javascript"
          src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

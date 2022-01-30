@@ -21,7 +21,7 @@ class MyWheelsCar extends Car
         console.log("fees: " + @feehours + "/hour, "+@feekilometers + "/kilometer with "+@discount+"% discount")
         
         # compute time component
-        unpaidhours = journey.hours
+        unpaidhours = Math.ceil(journey.hours) # pay per started hour
         timecomponent = 0
         
         while unpaidhours > 0
@@ -39,6 +39,8 @@ class MyWheelsCar extends Car
     
     updateDiscount: (newdiscount) ->
         @discount = newdiscount
+            
+class 
             
 # instantiation functions        
 instantiateMyWheelsCars = ->

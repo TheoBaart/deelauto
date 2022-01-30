@@ -12,7 +12,7 @@ layout: home
 
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
-No consideration yet of maximum fees, discounts or bundles!
+**Let op!** Sommige providers rekenenen met variable tarieven (op basis van vraag/aanbod). De tarieven in deze applicatie zijn dus vooral een indicatie. Daadwerkelijke kosten kunnen verschillen. *Laatste prijsupdate 30 januari 2022.*
 
 <label for="vendors">Deelauto provider:</label>
 <select name="vendors" id="vendors">
@@ -34,4 +34,7 @@ No consideration yet of maximum fees, discounts or bundles!
   <button type="submit">Submit</button>
 </form>
 
-Deze rit kost ongeveer: <span id="journey_price"></span>
+Deze rit kost ongeveer: <em><span id="journey_price"></span></em>
+
+De volgende kortingen en/of pakketen zijn actief:
+<em><span id="journey_discounts"></span></em>

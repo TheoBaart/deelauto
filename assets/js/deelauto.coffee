@@ -18,8 +18,7 @@ class MyWheelsCar extends Car
         @vendor = "MyWheels"
     
     computeJourneyPrice: (journey) ->
-        console.log("fees: " + @feehours + "/hour, "+@feekilometers + "/kilometer with "+@discount+"% discount")
-        
+
         # determine if discounts are needed    
         if @discount is 0
             discountedhours = @feehours
@@ -122,7 +121,6 @@ class SixtShareCar extends Car
         return bestPackage
         
     computeJourneyPrice: (journey) ->
-        console.log("fees: " + @feeminutes + "/minute, "+@feekilometers + "/kilometer ("+@includedkilometers+" kilometers included)")
             
         # base fee (no packages)
         baseTimeFee = (journey.minutes * @feeminutes)
@@ -160,10 +158,13 @@ class SixtShareCar extends Car
         
 instantiateSixtShareCars = ->
 #    define cars
-    bmwi3 = new SixtShareCar("BMW i3", 0.31)
+
     
     # budget cars array
-    budgetcars = []
+    seatMii = new SixtShareCar("Seat Mii", 0.27)
+    skodaCitigo = new SixtShareCar("Skoda CITIgo", 0.27)
+    
+    budgetcars = [seatMii, skodaCitigo]
     for budget in budgetcars
         # added backwards for easier math
         budget.addTimePackage("7 Dagen Pakket", 209, 7, "days", 600)
@@ -173,7 +174,11 @@ instantiateSixtShareCars = ->
         budget.addTimePackage("3 Uur Pakket", 32, 3, "hours", 80)
         
     # standard cars array
-    standardcars = []
+    nissanLeaf = new SixtShareCar("Nissan Leaf", 0.29)
+    hyundaiKona = new SixtShareCar("Hyundai Kona", 0.29)
+    ds3crossback = new SixtShareCar("DS 3 Crossback", 0.29)
+    
+    standardcars = [nissanLeaf,hyundaiKona,ds3crossback]
     for standard in standardcars
         # added backwards for easier math
         standard.addTimePackage("7 Dagen Pakket", 229, 7, "days", 600)
@@ -183,7 +188,10 @@ instantiateSixtShareCars = ->
         standard.addTimePackage("3 Uur Pakket", 35, 3, "hours", 80)
     
     # premium cars array
-    premiumcars = [bmwi3]
+    bmwi3 = new SixtShareCar("BMW i3", 0.31)
+    aiwaysU5 = new SixtShareCar("Aiways U", 0.31)
+    volkswagenGolf = new SixtShareCar("Volkswagen Golf", 0.31)
+    premiumcars = [bmwi3,aiwaysU5,volkswagenGolf]
     for premium in premiumcars
         # added backwards for easier math
         premium.addTimePackage("7 Dagen Pakket", 249, 7, "days", 600)
@@ -268,6 +276,7 @@ handleJourney = (journey, cars) ->
         $('#journey_price').text(fee+" euro")
         discounts = journeyPrice.packages
         $('#journey_discounts').text(discounts)
+        console.log(car_name+ " ("+vendor_name+") for "+fee+" euros using "+discounts)
     else
         clearText()
         alert("Selecteer eerst een auto!")

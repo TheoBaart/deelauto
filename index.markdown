@@ -12,8 +12,17 @@ layout: home
 
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
-Dit is iets heel simple. Nu iets minder
+No consideration yet of maximum fees, discounts or bundles!
 
+<label for="vendors">Deelauto provider:</label>
+<select name="vendors" id="vendors">
+    <option value="none">Selecteer een provider</option>
+</select>
+
+<label for="cars">Auto:</label>
+<select name="cars" id="cars">
+    <option value="none">Selecter eerst een provider</option>
+</select>
 
 <form id="journey_form">
     <label for="journey_km">Rit afstand (kilometers): </label>
@@ -24,3 +33,5 @@ Dit is iets heel simple. Nu iets minder
     <br>
   <button type="submit">Submit</button>
 </form>
+
+Deze rit kost ongeveer: <span id="journey_price"></span>

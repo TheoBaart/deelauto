@@ -242,6 +242,13 @@ instantiate = (cars) ->
 
 # initiate interactivity!
 
+addRowRecentResultsTable = (vendor, car, journey, journeyPrice) ->
+    header = $('#recent_results tr:first')
+    col = "</td><td>"
+    row = ("<tr><td>"+vendor+col+car+col+journey.kilometers+col+journey.minutes+col+journeyPrice.fee+col+journeyPrice.packages+"</tr></td>")
+    header.after(row)
+    
+
 updateCarsDropdown = (new_vendor, cars) ->
     car_names = []
     for car in cars
@@ -277,6 +284,7 @@ handleJourney = (journey, cars) ->
         discounts = journeyPrice.packages
         $('#journey_discounts').text(discounts)
         console.log(car_name+ " ("+vendor_name+") for "+fee+" euros using "+discounts)
+        addRowRecentResultsTable(vendor_name, car_name, journey, journeyPrice)
     else
         clearText()
         alert("Selecteer eerst een auto!")

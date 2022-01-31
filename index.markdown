@@ -24,6 +24,15 @@ layout: home
     <option value="none">Selecter eerst een provider</option>
 </select>
 
+<!--
+<div id="feeoverride" class="hidden">
+    <em>De geselecteerde deelauto provider gebruikt vaak variable tarieven. Gebruik het menu hieronder om eventueel zelf de tarieven in te stellen</em>
+    <br>    
+    <label for="feetime">Kosten per minuut</label><input type="number" id="feetime" name="feetime">
+    <label for="feedistance">Kosten per kilometer</label><input type="number" id="feetime" name="feetime">
+</div>
+-->
+
 <form id="journey_form">
     <label for="journey_km">Rit afstand (kilometers): </label>
     <input type="number" id="journey_kilometers" name="journey_kilometers" min="1" required >
@@ -31,10 +40,22 @@ layout: home
     <label for="journey_min">Rit duur (minuten): </label>
     <input type="number" id="journey_minutes" name="journey_minutes" min="1" required >
     <br>
-  <button type="submit">Submit</button>
+  <button type="submit">Bereken!</button>
 </form>
 
 Deze rit kost ongeveer: <em><span id="journey_price"></span></em>
 
 De volgende kortingen en/of pakketen zijn actief:
 <em><span id="journey_discounts"></span></em>
+
+Recente Ritten:
+<table id="recent_results">
+    <tr>
+        <th>Provider</th>
+        <th>Auto</th>
+        <th>Rit afstand (kilometers</th>
+        <th>Rit duur (minuten)</th>
+        <th>Rit kosten</th>
+        <th>Rit kortingen en/of pakketen</th>
+    </tr>
+</table>

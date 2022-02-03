@@ -24,14 +24,32 @@ layout: home
     <option value="none">Selecter eerst een provider</option>
 </select>
 
-<!--
-<div id="feeoverride" class="hidden">
-    <em>De geselecteerde deelauto provider gebruikt vaak variable tarieven. Gebruik het menu hieronder om eventueel zelf de tarieven in te stellen</em>
+
+<div id="customization" class="customized">
+    <hr>
+    <div id="customized_sixt"
+         <p><em>De geselecteerde deelauto provider gebruikt vaak variable tarieven. Gebruik het menu hieronder om eventueel zelf de tarieven in te stellen</em></p>
     <br>    
-    <label for="feetime">Kosten per minuut</label><input type="number" id="feetime" name="feetime">
-    <label for="feedistance">Kosten per kilometer</label><input type="number" id="feetime" name="feetime">
+    <label class="toggl">
+        <input id="timetoggl" type="checkbox"><span class="toggl round"></span>
+    </label>
+    <label for="timeoverride">Kosten per minuut:</label><input type="number" id="timeoverride" name="timeoverride">
+    <br>
+    <label class="toggl">
+        <input id="kilometertoggl" type="checkbox"><span class="toggl round"></span>
+    </label>
+    <label for="kilometeroverride">Kosten per kilometer:</label><input type="number" id="kilometeroverride" name="kilometeroverride">
+    <br>
+    </div>
+    <div id ="customized_mywheels">
+        <p><em>De geselecteerde deelauto heeft verschillende soorten abbonement. Welke is van toepassing voor deze rit?</em> TODO CONVERT TO THREE TOGGLE</p>
+        <br>
+        <label class="toggl">
+            <input id="kilometertoggl" type="checkbox"><span class="toggl round"></span>
+        </label>
+    </div>
+    <hr>
 </div>
--->
 
 <form id="journey_form">
     <label for="journey_km">Rit afstand (kilometers): </label>
@@ -48,8 +66,29 @@ Deze rit kost ongeveer: <em><span id="journey_price"></span></em>
 De volgende kortingen en/of pakketen zijn actief:
 <em><span id="journey_discounts"></span></em>
 
+Laat recente ritten zien <label class="toggl">
+   <input id="kilometertoggl" type="checkbox"><span class="toggl round"></span>
+</label>
+<br>
 Recente Ritten:
 <table id="recent_results">
+    <tr>
+        <th>Provider</th>
+        <th>Auto</th>
+        <th>Rit afstand (kilometers</th>
+        <th>Rit duur (minuten)</th>
+        <th>Rit kosten</th>
+        <th>Rit kortingen en/of pakketen</th>
+    </tr>
+</table>
+
+
+Laat alle autos zien <label class="toggl">
+   <input id="kilometertoggl" type="checkbox"><span class="toggl round"></span>
+</label>
+<br>
+Alle Autos:
+<table id="all_results">
     <tr>
         <th>Provider</th>
         <th>Auto</th>

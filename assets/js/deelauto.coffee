@@ -301,11 +301,23 @@ $(document).ready ->
         event.preventDefault()
         clearText()
         
-    # handle form submission
-    $('#journey_form').submit (event) ->
+    # handle button press submission
+    $('#calculate').click (event) ->
         event.preventDefault()
+        duration_type = "minutes"
         kilometers = parseInt($('#journey_kilometers').val(),10)
-        minutes = parseInt($('#journey_minutes').val(),10)
-        hours = (minutes / 60)
-        journey = new Journey(kilometers, minutes, hours) 
-        handleJourney(journey, window.cars)
+        duration = parseInt($('#journey_duration').val(),10)
+        if (kilometers > 0) and (duration > 0) 
+            if duration_type is "days"
+                hours = duration * 24
+                minutes = (hours * 60)
+            else if duration_type is "hours"
+                hours = duration
+                minutes = (hours * 60)
+            else
+                minutes = duration
+                hours = (minutes / 60)
+            journey = new Journey(kilometers, minutes, hours) 
+            handleJourney(journey, window.cars)
+        else
+            alert("Afstand of duur data is niet compleet!")

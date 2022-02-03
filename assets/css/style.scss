@@ -1,22 +1,18 @@
-___
-___
+---
+---
 
 @import "{{ site.theme }}";
 
 .hidden {
-    display:none
+    display:none;
+    width: 100%
 }
 
-.override {
-    border: 1px solid grey;
-    margin: 1em;
-    padding: 1em;
+.float_container {
+    padding: 20px
 }
 
-.site-nav {
-    display: none
-}
-
-.page-content{
-    background-color: red   
+.float_content {
+    width: 50%;
+    float: left;   
 }

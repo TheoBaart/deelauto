@@ -102,6 +102,7 @@ De volgende kortingen en/of pakketen zijn actief:
 <div id="all_results_container" class="hidden">
     <br>
     <hr>
+    <b>TO IMPLEMENT</b>
     <b>Alle Autos:</b>
     <table id="all_results">
         <tr>
@@ -109,6 +110,7 @@ De volgende kortingen en/of pakketen zijn actief:
             <th>Auto</th>
             <th>Rit afstand (kilometers</th>
             <th>Rit duur (minuten)</th>
+            <th>Rit duur (uren)</th>
             <th>Rit kosten</th>
             <th>Rit kortingen en/of pakketen</th>
         </tr>
@@ -136,6 +138,7 @@ De volgende kortingen en/of pakketen zijn actief:
             <th>Auto</th>
             <th>Rit afstand (kilometers</th>
             <th>Rit duur (minuten)</th>
+            <th>Rit duur (uren)</th>
             <th>Rit kosten</th>
             <th>Rit kortingen en/of pakketen</th>
         </tr>

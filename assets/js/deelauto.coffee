@@ -17,16 +17,27 @@ class MyWheelsCar extends Car
     constructor: (@id, @feehours, @feekilometers, @discount) ->
         @vendor = "MyWheels"
     
-    computeJourneyPrice: (journey) ->
+    computeJourneyPrice: (journey, usedDiscount = @discount) ->
 
-        # determine if discounts are needed    
-        if @discount is 0
+        # note if trip > 2 keer max day tariff you get 25% discount
+        if journey.hours >= 38
+            discountedhours = @feehours - (@feehours * 25/100)
+            discountedkilometers = @feekilometers - (@feekilometers * 25/100)
+            discounts = "25% korting (Meerdagen)" 
+        else if usedDiscount is 0
             discountedhours = @feehours
             discountedkilometers = @feekilometers
             discounts = "geen"
+        else
+            discountedhours = @feehours - (@feehours * usedDiscount/100)
+            discountedkilometers = @feekilometers - (@feekilometers * usedDiscount/100)
+            discounts = switch
+                when usedDiscount = 15 then discounts = usedDiscount + "% korting (Plus)" 
+                when usedDiscount = 25 then discounts = usedDiscount + "% korting (Pro)"
+                else discounts = usedDiscount + "% korting" 
         
         # compute time component
-        unpaidhours = Math.ceil(journey.hours) # pay per started hour
+        unpaidhours = Math.ceil(journey.hours) # pay per hour
         timecomponent = 0
         
         while unpaidhours > 0
@@ -127,7 +138,6 @@ class SixtShareCar extends Car
         @computeJourneyPrice(journey, @feeminutes, override)
         
     computeJourneyPrice: (journey, usedMinutefee = @feeminutes, usedKilometerfee = @feekilometers) ->
-            
         # base fee (no packages)
         baseTimeFee = (journey.minutes * usedMinutefee)
         baseDistanceFee = Math.max((journey.kilometers - @includedkilometers),0) * usedKilometerfee
@@ -164,7 +174,6 @@ class SixtShareCar extends Car
         
 instantiateSixtShareCars = ->
 #    define cars
-
     
     # budget cars array
     seatMii = new SixtShareCar("Seat Mii", 0.27)
@@ -195,7 +204,7 @@ instantiateSixtShareCars = ->
     
     # premium cars array
     bmwi3 = new SixtShareCar("BMW i3", 0.31)
-    aiwaysU5 = new SixtShareCar("Aiways U", 0.31)
+    aiwaysU5 = new SixtShareCar("Aiways U5", 0.31)
     volkswagenGolf = new SixtShareCar("Volkswagen Golf", 0.31)
     premiumcars = [bmwi3,aiwaysU5,volkswagenGolf]
     for premium in premiumcars
@@ -251,7 +260,7 @@ instantiate = (cars) ->
 addRowRecentResultsTable = (vendor, car, journey, journeyPrice) ->
     header = $('#recent_results tr:first')
     col = "</td><td>"
-    row = ("<tr><td>"+vendor+col+car+col+journey.kilometers+col+journey.minutes+col+journeyPrice.fee+col+journeyPrice.packages+"</tr></td>")
+    row = ("<tr><td>"+vendor+col+car+col+journey.kilometers+col+journey.minutes+col+journey.hours+col+journeyPrice.fee+col+journeyPrice.packages+"</tr></td>")
     header.after(row)
     
 
@@ -274,10 +283,31 @@ clearText = ->
     $('#journey_price').text("")
     $('#journey_discounts').text("")
 
+handleSixtOverrides = (car, journey) ->
+    min_override = parseFloat($('#minuteoverride').val()).toFixed(2)
+    km_override = parseFloat($('#kilometeroverride').val()).toFixed(2)
+    sixt_min_override = $('#sixt_min_toggle').is(":checked")
+    sixt_km_override = $('#sixt_km_toggle').is(":checked")
+    if sixt_min_override and sixt_km_override
+        return car.computeJourneyPrice(journey, min_override, km_override)
+    else if sixt_min_override or sixt_km_override
+        if sixt_min_override
+            return car.computeJourneyPriceMinuteOverride(journey, min_override)
+        else
+            return car.computeJourneyPriceKilometerOverride(journey, km_override)
+    else
+       return car.computeJourneyPrice(journey)
+    
+handleMyWheelsOverrides = (car, journey) ->
+    journeyPrice = switch
+        when $('#mywheels_subscription').val() is "plus" then car.computeJourneyPrice(journey, 15) # 15% discount
+        when $('#mywheels_subscription').val() is "pro" then car.computeJourneyPrice(journey, 25) # 25% discount
+        else car.computeJourneyPrice(journey) # no discount
+    return journeyPrice
+    
 handleJourney = (journey, cars) ->
     vendor_name = $('#vendors').val()
     car_name = $('#cars').val()
-
     for car in cars
         if (car.id is car_name) && (car.vendor is vendor_name)
             selected = car
@@ -285,27 +315,16 @@ handleJourney = (journey, cars) ->
             
     if selected?
         # SIXT OVERRIDE?    
-        if vendor_name = "Sixt Share"
-            min_override = parseInt($('#minuteoverride').val(),10)
-            km_override = parseInt($('#kilometeroverride').val(),10)
-            sixt_min_override = $('#sixt_min_toggle').is(":checked")
-            sixt_km_override = $('#sixt_km_toggle').is(":checked")
-            
-            if sixt_min_override and sixt_km_override
-                journeyPrice = selected.computeJourneyPrice(journey, min_override, km_override)
-            else if sixt_min_override or sixt_km_override
-                if sixt_min_override
-                    journeyPrice = selected.computeJourneyPriceMinuteOverride(journey, min_override)
-                else
-                    journeyPrice = selected.computeJourneyPriceKilometerOverride(journey, km_override)
-            else
-                journeyPrice = selected.computeJourneyPrice(journey)
+        if vendor_name is "Sixt Share"
+            console.log("Sixt")
+            journeyPrice = handleSixtOverrides(selected, journey)
         # MYWHEELS OVERRIDE
-        else if vendor_name = "MyWheels"
-            journeyPrice = selected.computeJourneyPrice(journey)
+        else if vendor_name is "MyWheels"
+            console.log("MyWheels")
+            journeyPrice = handleMyWheelsOverrides(selected, journey)
         # DEFAULT
         else
-            # get the journey price
+            console.log("else")
             journeyPrice = selected.computeJourneyPrice(journey)
         fee = journeyPrice.fee
         $('#journey_price').text(fee+" euro")
@@ -313,6 +332,8 @@ handleJourney = (journey, cars) ->
         $('#journey_discounts').text(discounts)
         console.log(car_name+ " ("+vendor_name+") for "+fee+" euros using "+discounts)
         addRowRecentResultsTable(vendor_name, car_name, journey, journeyPrice)
+        
+#        updateOtherCars(car_name)
     else
         clearText()
         alert("Selecteer eerst een auto!")

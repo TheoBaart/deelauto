@@ -103,16 +103,16 @@ class SixtShareCar extends Car
         timePackage = {name: packageName, hours: packageTime, price:packagePrice, kilometers: packageKilometers}
         @timePackages.push timePackage
         
-    getBestDistancePackage: (journeyKilometers, packageKilometers) ->
+    getBestDistancePackage: (journeyKilometers, packageKilometers, kilometerFee) ->
         unpaidKilometers = Math.max((journeyKilometers - packageKilometers),0)
         
-        alreadyIncluded = unpaidKilometers * @feekilometers # base case
+        alreadyIncluded = unpaidKilometers * kilometerFee # base case
         bestPackage = {name:"geen kilometer pakket",fee:alreadyIncluded}
  
         if unpaidKilometers > 0
             for distancePackage in @distancePackages
                 excludedkilometers = Math.max((unpaidKilometers - distancePackage.kilometers),0)
-                distancePackageFee = distancePackage.price + (excludedkilometers * @feekilometers)
+                distancePackageFee = distancePackage.price + (excludedkilometers * kilometerFee)
             
                 if distancePackageFee < bestPackage.fee
                     bestPackage.fee = distancePackageFee
@@ -120,18 +120,24 @@ class SixtShareCar extends Car
                 
         return bestPackage
         
-    computeJourneyPrice: (journey) ->
+    computeJourneyPriceMinuteOverride:(journey, override) ->
+        @computeJourneyPrice(journey, override, @feekilometers)
+        
+    computeJourneyPriceKilometerOverride:(journey, override) ->
+        @computeJourneyPrice(journey, @feeminutes, override)
+        
+    computeJourneyPrice: (journey, usedMinutefee = @feeminutes, usedKilometerfee = @feekilometers) ->
             
         # base fee (no packages)
-        baseTimeFee = (journey.minutes * @feeminutes)
-        baseDistanceFee = Math.max((journey.kilometers - @includedkilometers),0) * @feekilometers
+        baseTimeFee = (journey.minutes * usedMinutefee)
+        baseDistanceFee = Math.max((journey.kilometers - @includedkilometers),0) * usedKilometerfee
         baseFee = baseTimeFee + baseDistanceFee
         packagesUsed = "geen"
         
         bestFee = baseFee
         
         # see if km packages can improve on this situation
-        distancePackage = @getBestDistancePackage(journey.kilometers, @includedkilometers)
+        distancePackage = @getBestDistancePackage(journey.kilometers, @includedkilometers, usedKilometerfee)
         if (baseTimeFee + distancePackage.fee) < bestFee
             bestFee = (baseTimeFee + distancePackage.fee)
             packagesUsed = ("geen tijd pakket en "+distancePackage.name)
@@ -141,7 +147,7 @@ class SixtShareCar extends Car
             uncoveredminutes = Math.max(journey.minutes - (timePackage.hours*60), 0)
             timePackageFee = timePackage.price + (uncoveredminutes * @feeextratime)
             
-            distancePackage = @getBestDistancePackage(journey.kilometers, timePackage.kilometers)
+            distancePackage = @getBestDistancePackage(journey.kilometers, timePackage.kilometers, usedKilometerfee)
             
             packageFee = timePackageFee + distancePackage.fee
             
@@ -278,11 +284,29 @@ handleJourney = (journey, cars) ->
             break
             
     if selected?
-        # determine if we need to override things
-        alert($('#sixt_min_toggle').is(":checked"))
-        
-        # get the journey price
-        journeyPrice = selected.computeJourneyPrice(journey)
+        # SIXT OVERRIDE?    
+        if vendor_name = "Sixt Share"
+            min_override = parseInt($('#minuteoverride').val(),10)
+            km_override = parseInt($('#kilometeroverride').val(),10)
+            sixt_min_override = $('#sixt_min_toggle').is(":checked")
+            sixt_km_override = $('#sixt_km_toggle').is(":checked")
+            
+            if sixt_min_override and sixt_km_override
+                journeyPrice = selected.computeJourneyPrice(journey, min_override, km_override)
+            else if sixt_min_override or sixt_km_override
+                if sixt_min_override
+                    journeyPrice = selected.computeJourneyPriceMinuteOverride(journey, min_override)
+                else
+                    journeyPrice = selected.computeJourneyPriceKilometerOverride(journey, km_override)
+            else
+                journeyPrice = selected.computeJourneyPrice(journey)
+        # MYWHEELS OVERRIDE
+        else if vendor_name = "MyWheels"
+            journeyPrice = selected.computeJourneyPrice(journey)
+        # DEFAULT
+        else
+            # get the journey price
+            journeyPrice = selected.computeJourneyPrice(journey)
         fee = journeyPrice.fee
         $('#journey_price').text(fee+" euro")
         discounts = journeyPrice.packages
@@ -294,16 +318,16 @@ handleJourney = (journey, cars) ->
         alert("Selecteer eerst een auto!")
     
 updateCustomization = ->
-        vendor = $("#vendors").val()
-        if vendor is "MyWheels"
-            $("#customized_sixt").addClass("hidden")
-            $("#customized_mywheels").removeClass("hidden")
-        else if vendor is "Sixt Share"
-            $("#customized_sixt").removeClass("hidden")
-            $("#customized_mywheels").addClass("hidden")
-        else
-            $("#customized_sixt").addClass("hidden")
-            $("#customized_mywheels").addClass("hidden")
+    vendor = $("#vendors").val()
+    if vendor is "MyWheels"
+        $("#customized_sixt").addClass("hidden")
+        $("#customized_mywheels").removeClass("hidden")
+    else if vendor is "Sixt Share"
+        $("#customized_sixt").removeClass("hidden")
+        $("#customized_mywheels").addClass("hidden")
+    else
+        $("#customized_sixt").addClass("hidden")
+        $("#customized_mywheels").addClass("hidden")
     
 $(document).ready -> 
     window.cars = instantiate([])
@@ -321,22 +345,9 @@ $(document).ready ->
         event.preventDefault()
         clearText()
         
-    $('#all_toggle').change (event) ->
-        console.log($('#all_toggle').is(":checked"))
-        if $('#all_toggle').is(":checked")
-            $('#all_results_container').removeClass("hidden")
-        else
-            $('#all_results_container').addClass("hidden")
-            
-   $('#recent_toggle').change (event) ->
-        console.log($('#recent_toggle').is(":checked"))
-        if $('#recent_toggle').is(":checked")
-            $('#recent_results_container').removeClass("hidden")
-        else
-            $('#recent_results_container').addClass("hidden")
-
     # handle button press submission
     $('#calculate').click (event) ->
+#        alert("CLICK")
         event.preventDefault()
         journey_units = $('#journey_units').val()
         kilometers = parseInt($('#journey_kilometers').val(),10)
@@ -356,3 +367,15 @@ $(document).ready ->
             handleJourney(journey, window.cars)
         else
             alert("Afstand of duur data is niet compleet!")
+
+    $('#all_toggle').click (event) ->
+        if $('#all_toggle').is(":checked")
+            $('#all_results_container').removeClass("hidden")
+        else
+            $('#all_results_container').addClass("hidden")
+#
+#   $('#recent_toggle').click (event) ->
+#        if $('#recent_toggle').is(":checked")
+#            $('#recent_results_container').removeClass("hidden")
+#        else
+#            $('#recent_results_container').addClass("hidden")

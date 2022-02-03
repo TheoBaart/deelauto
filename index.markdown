@@ -54,7 +54,7 @@ layout: default
                 <label for="sixt_min_toggle"></label>
             </div>
             <div class="toggle-child">
-                <label for="minuteoverride">Kosten per minuut:</label><input type="number" id="minuteoverride" placeholder="in cent per minuut">
+                <label for="minuteoverride">Kosten per minuut:</label><input type="number" id="minuteoverride" placeholder="in euros per minuut" step="0.01">
             </div>
         </div>
         <br>
@@ -64,7 +64,7 @@ layout: default
                 <label for="sixt_km_toggle"></label>
             </div>
             <div class="toggle-child">
-                <label for="kilometeroverride">Kosten per kilometer:</label><input type="number" id="kilometeroverride" placeholder="in cent per kilometer">
+                <label for="kilometeroverride">Kosten per kilometer:</label><input type="number" id="kilometeroverride" placeholder="in euros per kilometer" step="0.01">
             </div>
         </div>
     </div>
@@ -98,9 +98,11 @@ De volgende kortingen en/of pakketen zijn actief:
         Laat alle autos for deze rit zien 
     </div>
 </div>
-<hr>
+
 <div id="all_results_container" class="hidden">
-    Alle Autos:
+    <br>
+    <hr>
+    <b>Alle Autos:</b>
     <table id="all_results">
         <tr>
             <th>Provider</th>
@@ -111,9 +113,10 @@ De volgende kortingen en/of pakketen zijn actief:
             <th>Rit kortingen en/of pakketen</th>
         </tr>
     </table>
+    <br>
 </div>
-<br>
   
+<!--
 <div class="toggle_container">
     <div class="toggle-child">
         <input id="recent_toggle" class="cmn-toggle cmn-toggle-round" type="checkbox">
@@ -123,9 +126,10 @@ De volgende kortingen en/of pakketen zijn actief:
         Laat recente ritten zien 
     </div>
 </div>
+-->
 <hr>
 <div id="recent_results_container">
-    Recente Ritten:
+    <b>Recente Ritten:</b>
     <table id="recent_results">
         <tr>
             <th>Provider</th>
@@ -136,4 +140,5 @@ De volgende kortingen en/of pakketen zijn actief:
             <th>Rit kortingen en/of pakketen</th>
         </tr>
     </table>
+    <br>
 </div>

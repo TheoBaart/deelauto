@@ -3,16 +3,90 @@
 
 @import "{{ site.theme }}";
 
+// THEMING BELOW
+.main-content hr {
+    background-color: #159957;
+}
+
+label {
+    padding: 10px;
+}
+
+// THEMING ABOVE
+
+// CUSTOMIZATION FIELDS BELOW
 .hidden {
     display:none;
     width: 100%
 }
 
-.float_container {
-    padding: 20px
+// CUSTOMIZATION FIELDS ABOVE
+
+// GRID LAYOUT BELOW
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
 }
 
-.float_content {
-    width: 50%;
-    float: left;   
+// GRID LAYOUT ABOVE
+
+// TOGGLE BELOW
+
+.toggle_container {
+    display: grid;
+    grid-template-columns: 3em auto;
+    gird-gap: 10px
 }
+
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: 2.2em;//120px;
+  height: 1.1em;//60px;
+  background-color: #dddddd;
+  border-radius: 60px;
+}
+input.cmn-toggle-round + label:before,
+input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: 1em;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+  background-color: #159957;
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: 1.1em;
+}
+
+// TOGGLE ABOVE

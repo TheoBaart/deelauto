@@ -278,6 +278,10 @@ handleJourney = (journey, cars) ->
             break
             
     if selected?
+        # determine if we need to override things
+        alert($('#sixt_min_toggle').is(":checked"))
+        
+        # get the journey price
         journeyPrice = selected.computeJourneyPrice(journey)
         fee = journeyPrice.fee
         $('#journey_price').text(fee+" euro")
@@ -289,35 +293,66 @@ handleJourney = (journey, cars) ->
         clearText()
         alert("Selecteer eerst een auto!")
     
+updateCustomization = ->
+        vendor = $("#vendors").val()
+        if vendor is "MyWheels"
+            $("#customized_sixt").addClass("hidden")
+            $("#customized_mywheels").removeClass("hidden")
+        else if vendor is "Sixt Share"
+            $("#customized_sixt").removeClass("hidden")
+            $("#customized_mywheels").addClass("hidden")
+        else
+            $("#customized_sixt").addClass("hidden")
+            $("#customized_mywheels").addClass("hidden")
+    
 $(document).ready -> 
     window.cars = instantiate([])
-
+    updateCustomization()
+    $('#recent_toggle').prop("checked",true)
+    $('#all_toggle').prop("checked",false)
+    
     $('#vendors').change (event) ->
         event.preventDefault()
         clearText()
+        updateCustomization()
         updateCarsDropdown($("#vendors").val(),window.cars)
     
     $('#cars').change (event) ->
         event.preventDefault()
         clearText()
         
+    $('#all_toggle').change (event) ->
+        console.log($('#all_toggle').is(":checked"))
+        if $('#all_toggle').is(":checked")
+            $('#all_results_container').removeClass("hidden")
+        else
+            $('#all_results_container').addClass("hidden")
+            
+   $('#recent_toggle').change (event) ->
+        console.log($('#recent_toggle').is(":checked"))
+        if $('#recent_toggle').is(":checked")
+            $('#recent_results_container').removeClass("hidden")
+        else
+            $('#recent_results_container').addClass("hidden")
+
     # handle button press submission
     $('#calculate').click (event) ->
         event.preventDefault()
-        duration_type = "minutes"
+        journey_units = $('#journey_units').val()
         kilometers = parseInt($('#journey_kilometers').val(),10)
         duration = parseInt($('#journey_duration').val(),10)
         if (kilometers > 0) and (duration > 0) 
-            if duration_type is "days"
+            if journey_units is "days"
                 hours = duration * 24
                 minutes = (hours * 60)
-            else if duration_type is "hours"
+            else if journey_units is "hours"
                 hours = duration
                 minutes = (hours * 60)
             else
                 minutes = duration
                 hours = (minutes / 60)
             journey = new Journey(kilometers, minutes, hours) 
+            
             handleJourney(journey, window.cars)
         else
             alert("Afstand of duur data is niet compleet!")

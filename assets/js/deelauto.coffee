@@ -342,7 +342,17 @@ updateCustomization = ->
     vendor = $("#vendors").val()
     if vendor is "MyWheels"
         $("#customized_sixt").addClass("hidden")
+        if($('#mywheels_subscription').val() is "plus")
+            $("#plus_fee").removeClass("hidden")
+            $("#pro_fee").addClass("hidden")
+        else if($('#mywheels_subscription').val() is "pro")   
+            $("#plus_fee").addClass("hidden")
+            $("#pro_fee").removeClass("hidden")
+        else
+            $("#plus_fee").addClass("hidden")
+            $("#pro_fee").addClass("hidden")
         $("#customized_mywheels").removeClass("hidden")
+            
     else if vendor is "Sixt Share"
         $("#customized_sixt").removeClass("hidden")
         $("#customized_mywheels").addClass("hidden")
@@ -361,6 +371,11 @@ $(document).ready ->
         clearText()
         updateCustomization()
         updateCarsDropdown($("#vendors").val(),window.cars)
+        
+    $('#mywheels_subscription').change (event) ->
+        event.preventDefault()
+        clearText()
+        updateCustomization()
     
     $('#cars').change (event) ->
         event.preventDefault()

@@ -76,6 +76,8 @@ layout: default
             <option value="plus">Plus</option>
             <option value="pro">Pro</option>
         </select>
+        <div id="plus_fee"><br><em>Rit kosten zijn exclusief abonnementskosten van €10/maand!</em></div>
+        <div id="pro_fee"><br><em>Rit kosten zijn exclusief abonnementskosten van €25/maand!</em></div>
     </div>
 </div>
 <hr>

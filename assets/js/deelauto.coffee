@@ -262,6 +262,14 @@ addRowRecentResultsTable = (vendor, car, journey, journeyPrice) ->
     row = ("<tr><td>"+vendor+col+car+col+journey.kilometers+col+journey.minutes+col+journey.hours+col+journeyPrice.fee+col+journeyPrice.packages+"</tr></td>")
     header.after(row)
     
+addRowAllResultsTable = (vendor, car, journey, journeyPrice,activeCar) ->
+    col = "</td><td>"
+    if activeCar
+        row = ("<tr class=\"highlighted_row\">    <td>"+vendor+col+car+col+journey.kilometers+col+journey.minutes+col+journey.hours+col+journeyPrice.fee+col+journeyPrice.packages+"</tr></td>")
+        $("#all_results_body").append(row)
+    else
+        row = ("<tr>    <td>"+vendor+col+car+col+journey.kilometers+col+journey.minutes+col+journey.hours+col+journeyPrice.fee+col+journeyPrice.packages+"</tr></td>")
+        $("#all_results_body").append(row)
 
 updateCarsDropdown = (new_vendor, cars) ->
     car_names = []
@@ -304,35 +312,40 @@ handleMyWheelsOverrides = (car, journey) ->
         else car.computeJourneyPrice(journey) # no discount
     return journeyPrice
     
-handleJourney = (journey, cars) ->
-    vendor_name = $('#vendors').val()
-    car_name = $('#cars').val()
-    for car in cars
-        if (car.id is car_name) && (car.vendor is vendor_name)
-            selected = car
-            break
-            
-    if selected?
-        # SIXT OVERRIDE?    
-        if vendor_name is "Sixt Share"
-            journeyPrice = handleSixtOverrides(selected, journey)
-        # MYWHEELS OVERRIDE
-        else if vendor_name is "MyWheels"
-            journeyPrice = handleMyWheelsOverrides(selected, journey)
-        # DEFAULT
-        else
-            journeyPrice = selected.computeJourneyPrice(journey)
+handleJourney = (journey, car, selected) ->
+    # SIXT OVERRIDE?    
+    if car.vendor is "Sixt Share"
+        journeyPrice = handleSixtOverrides(car, journey)
+    # MYWHEELS OVERRIDE
+    else if car.vendor is "MyWheels"
+        journeyPrice = handleMyWheelsOverrides(car, journey)
+    # DEFAULT
+    else
+        journeyPrice = car.computeJourneyPrice(journey)
+    if selected
         fee = journeyPrice.fee
         $('#journey_price').text(fee+" euro")
         discounts = journeyPrice.packages
         $('#journey_discounts').text(discounts)
-        console.log(car_name+ " ("+vendor_name+") for "+fee+" euros using "+discounts)
-        addRowRecentResultsTable(vendor_name, car_name, journey, journeyPrice)
-        
-#        updateOtherCars(car_name)
+        console.log(car.id+ " ("+car.vendor+") for "+fee+" euros using "+discounts)
+        addRowRecentResultsTable(car.vendor, car.id, journey, journeyPrice)
+        addRowAllResultsTable(car.vendor, car.id, journey, journeyPrice, true)
     else
-        clearText()
-        alert("Selecteer eerst een auto!")
+        addRowAllResultsTable(car.vendor, car.id, journey, journeyPrice, false)
+
+computeCars = (journey) ->
+    selected_vendor_name = $("#vendors").val()
+    selected_car_name = $("#cars").val()
+
+    # clear ResultsTable
+    $('#all_results > tbody').empty()
+
+    for car in window.cars
+        if (car.id is selected_car_name and car.vendor is selected_vendor_name)
+            handleJourney(journey, car, true)
+        else
+            handleJourney(journey, car, false)
+ 
     
 updateCustomization = ->
     vendor = $("#vendors").val()
@@ -396,7 +409,7 @@ $(document).ready ->
                 hours = (minutes / 60)
             journey = new Journey(kilometers, minutes, hours) 
             
-            handleJourney(journey, window.cars)
+            computeCars(journey)
         else
             alert("Afstand of duur data is niet compleet!")
 

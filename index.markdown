@@ -107,7 +107,7 @@ De volgende kortingen en/of pakketen zijn actief:
     <b>TO IMPLEMENT</b>
     <b>Alle Autos:</b>
     <table id="all_results">
-        <tr>
+        <thead><tr>
             <th>Provider</th>
             <th>Auto</th>
             <th>Rit afstand (kilometers</th>
@@ -116,6 +116,9 @@ De volgende kortingen en/of pakketen zijn actief:
             <th>Rit kosten</th>
             <th>Rit kortingen en/of pakketen</th>
         </tr>
+        </thead>
+        <tbody id="all_results_body">
+        </tbody>
     </table>
     <br>
 </div>
@@ -135,7 +138,7 @@ De volgende kortingen en/of pakketen zijn actief:
 <div id="recent_results_container">
     <b>Recente Ritten:</b>
     <table id="recent_results">
-        <tr>
+        <thead><tr>
             <th>Provider</th>
             <th>Auto</th>
             <th>Rit afstand (kilometers</th>
@@ -144,6 +147,9 @@ De volgende kortingen en/of pakketen zijn actief:
             <th>Rit kosten</th>
             <th>Rit kortingen en/of pakketen</th>
         </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
     <br>
 </div>

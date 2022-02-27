@@ -69,7 +69,7 @@ layout: default
         </div>
     </div>
     <div id ="customized_mywheels" class="hidden">
-        <p><em>De geselecteerde deelauto heeft verschillende soorten abbonement. Welke is van toepassing voor deze rit?</em></p>
+        <p><em>De geselecteerde deelauto provider heeft verschillende soorten abbonement. Welke is van toepassing voor deze rit?</em></p>
         MyWheels Abbonement: 
         <select name="mywheels_subscription" id="mywheels_subscription">
             <option value="start">Start</option>

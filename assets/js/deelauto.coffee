@@ -107,11 +107,11 @@ class SixtShareCar extends Car
         @distancePackages.push distancePackage
         
     addTimePackage: (packageName, packagePrice, packageTime, timeUnit, packageKilometers) ->
-        hours = switch
+        packageHours = switch
             when timeUnit is "minutes" then packageTime / 60
             when timeUnit is "days" then packageTime * 24
             else packageTime
-        timePackage = {name: packageName, hours: packageTime, price:packagePrice, kilometers: packageKilometers}
+        timePackage = {name: packageName, hours: packageHours, price:packagePrice, kilometers: packageKilometers}
         @timePackages.push timePackage
         
     getBestDistancePackage: (journeyKilometers, packageKilometers, kilometerFee) ->
@@ -145,7 +145,6 @@ class SixtShareCar extends Car
         packagesUsed = "geen"
         
         bestFee = baseFee
-        
         # see if km packages can improve on this situation
         distancePackage = @getBestDistancePackage(journey.kilometers, @includedkilometers, usedKilometerfee)
         if (baseTimeFee + distancePackage.fee) < bestFee
@@ -316,15 +315,12 @@ handleJourney = (journey, cars) ->
     if selected?
         # SIXT OVERRIDE?    
         if vendor_name is "Sixt Share"
-            console.log("Sixt")
             journeyPrice = handleSixtOverrides(selected, journey)
         # MYWHEELS OVERRIDE
         else if vendor_name is "MyWheels"
-            console.log("MyWheels")
             journeyPrice = handleMyWheelsOverrides(selected, journey)
         # DEFAULT
         else
-            console.log("else")
             journeyPrice = selected.computeJourneyPrice(journey)
         fee = journeyPrice.fee
         $('#journey_price').text(fee+" euro")

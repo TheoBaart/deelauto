@@ -104,7 +104,6 @@ De volgende kortingen en/of pakketen zijn actief:
 <div id="all_results_container" class="hidden">
     <br>
     <hr>
-    <b>TO IMPLEMENT</b>
     <b>Alle Autos:</b>
     <table id="all_results">
         <thead><tr>

@@ -19,7 +19,7 @@ class MyWheelsCar extends Car
     
     computeJourneyPrice: (journey, usedDiscount = @discount) ->
 
-        # note if trip > 2 keer max day tariff you get 25% discount
+        # note if trip > 2 times max day tariff you get 25% discount
         if journey.hours >= 38
             discountedhours = @feehours - (@feehours * 25/100)
             discountedkilometers = @feekilometers - (@feekilometers * 25/100)
@@ -29,12 +29,12 @@ class MyWheelsCar extends Car
             discountedkilometers = @feekilometers
             discounts = "geen"
         else
-            discountedhours = @feehours - (@feehours * usedDiscount/100)
-            discountedkilometers = @feekilometers - (@feekilometers * usedDiscount/100)
+            discountedhours = @feehours * (1 - usedDiscount/100)
+            discountedkilometers = @feekilometers * (1 - usedDiscount/100)
             discounts = switch
-                when usedDiscount = 15 then discounts = usedDiscount + "% korting (Plus)" 
-                when usedDiscount = 25 then discounts = usedDiscount + "% korting (Pro)"
-                else discounts = usedDiscount + "% korting" 
+                when usedDiscount is 15 then usedDiscount + "% korting (Plus)" 
+                when usedDiscount is 25 then usedDiscount + "% korting (Pro)"
+                else usedDiscount + "% korting" 
         
         # compute time component
         unpaidhours = Math.ceil(journey.hours) # pay per hour

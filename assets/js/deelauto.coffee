@@ -60,32 +60,32 @@ class MyWheelsCar extends Car
 instantiateMyWheelsCars = ->
             
     # define cars
-    fiat500 = new MyWheelsCar("Fiat 500", 3, 0.29, 0)
-    toyotaAygo = new MyWheelsCar("Toyota Aygo", 3, 0.29, 0)
-    citroenC1 = new MyWheelsCar("Citroën C1", 3, 0.29, 0)
+    fiat500 = new MyWheelsCar("Fiat 500", 3.25, 0.32, 0)
+    toyotaAygo = new MyWheelsCar("Toyota Aygo", 3.25, 0.32, 0)
+    citroenC1 = new MyWheelsCar("Citroën C1", 3.25, 0.32, 0)
     
-    skodaCitigoe = new MyWheelsCar("Skoda CITIGOe", 3, 0.27, 0)
-    seatMiielectric = new MyWheelsCar("Seat Mii Electric", 3, 0.27, 0)
+    skodaCitigoe = new MyWheelsCar("Skoda CITIGOe", 3.25, 0.30, 0)
+    seatMiielectric = new MyWheelsCar("Seat Mii Electric", 3.25, 0.30, 0)
 
-    citroenC3 = new MyWheelsCar("Citroën C3", 3.5, 0.32, 0)
-    toyotaYarishybrid = new MyWheelsCar("Toyota Hybrid Yaris", 3.5, 0.32, 0)
-    renaultClio = new MyWheelsCar("Renault Clio", 3.5, 0.32, 0)
-    opelCorsa = new MyWheelsCar("Opel Corsa", 3.5, 0.32, 0)
-    nissanMicra = new MyWheelsCar("Nissan Micra", 3.5, 0.32, 0)
-    volkswagenPolo = new MyWheelsCar("Volkswagen Polo", 3.5, 0.32, 0)
-    miniOne = new MyWheelsCar("Mini One", 3.5, 0.32, 0)
+    citroenC3 = new MyWheelsCar("Citroën C3", 3.75, 0.35, 0)
+    toyotaYarishybrid = new MyWheelsCar("Toyota Hybrid Yaris", 3.75, 0.35, 0)
+    renaultClio = new MyWheelsCar("Renault Clio", 3.75, 0.35, 0)
+    opelCorsa = new MyWheelsCar("Opel Corsa", 3.75, 0.35, 0)
+    nissanMicra = new MyWheelsCar("Nissan Micra", 3.75, 0.35, 0)
+    volkswagenPolo = new MyWheelsCar("Volkswagen Polo", 3.75, 0.35, 0)
+    miniOne = new MyWheelsCar("Mini One", 3.75, 0.35, 0)
     
-    renaultZoe = new MyWheelsCar("Renault ZOE", 3.5, 0.30, 0)
-    nissanLeaf = new MyWheelsCar("Nissan Leaf", 3.5, 0.30, 0)
-    peugeotE208 = new MyWheelsCar("Peugeot E-208", 3.5, 0.30, 0)
-    miniCooperelectric = new MyWheelsCar("Mini Cooper Electric", 3.5, 0.30, 0)
+    renaultZoe = new MyWheelsCar("Renault ZOE", 3.75, 0.33, 0)
+    nissanLeaf = new MyWheelsCar("Nissan Leaf", 3.75, 0.33, 0)
+    peugeotE208 = new MyWheelsCar("Peugeot E-208", 3.75, 0.33, 0)
+    miniCooperelectric = new MyWheelsCar("Mini Cooper Electric", 3.75, 0.33, 0)
     
-    fordFocuswagon = new MyWheelsCar("Ford Focus Wagon", 4, 0.35, 0)
-    opelAstratourer = new MyWheelsCar("Opel Astra Tourer", 4, 0.35, 0)
+    fordFocuswagon = new MyWheelsCar("Ford Focus Wagon", 4.25, 0.38, 0)
+    opelAstratourer = new MyWheelsCar("Opel Astra Tourer", 4.25, 0.38, 0)
     
-    hyundaiKona = new MyWheelsCar("Hyundai Kona", 4, 0.33, 0)
-    kiaEniro = new MyWheelsCar("Kia e-Niro", 4, 0.33, 0)
-    aiwaysU5 = new MyWheelsCar("Aiways U5", 4, 0.33, 0)
+    hyundaiKona = new MyWheelsCar("Hyundai Kona", 4.25, 0.36, 0)
+    kiaEniro = new MyWheelsCar("Kia e-Niro", 4.25, 0.36, 0)
+    aiwaysU5 = new MyWheelsCar("Aiways U5", 4.25, 0.36, 0)
     
 #     define cars array
     cars = [fiat500, toyotaAygo, citroenC1, skodaCitigoe, seatMiielectric, citroenC3, toyotaYarishybrid, renaultClio, opelCorsa, nissanMicra, volkswagenPolo, miniOne, renaultZoe, nissanLeaf, peugeotE208, miniCooperelectric, fordFocuswagon, opelAstratourer, hyundaiKona, kiaEniro, aiwaysU5]

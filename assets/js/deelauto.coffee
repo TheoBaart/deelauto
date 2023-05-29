@@ -60,35 +60,41 @@ class MyWheelsCar extends Car
 instantiateMyWheelsCars = ->
             
     # define cars
-    fiat500 = new MyWheelsCar("Fiat 500", 3.25, 0.32, 0)
-    toyotaAygo = new MyWheelsCar("Toyota Aygo", 3.25, 0.32, 0)
-    citroenC1 = new MyWheelsCar("Citroën C1", 3.25, 0.32, 0)
+    fiat500 = new MyWheelsCar("Fiat 500", 3.25, 0.37, 0)
+    toyotaAygo = new MyWheelsCar("Toyota Aygo", 3.25, 0.37, 0)
+    citroenC1 = new MyWheelsCar("Citroën C1", 3.25, 0.37, 0)
     
-    skodaCitigoe = new MyWheelsCar("Skoda CITIGOe", 3.25, 0.30, 0)
-    seatMiielectric = new MyWheelsCar("Seat Mii Electric", 3.25, 0.30, 0)
+    skodaCitigoe = new MyWheelsCar("Skoda CITIGOe", 3.25, 0.37, 0)
+    seatMiielectric = new MyWheelsCar("Seat Mii Electric", 3.25, 0.37, 0)
 
-    citroenC3 = new MyWheelsCar("Citroën C3", 3.75, 0.35, 0)
-    toyotaYarishybrid = new MyWheelsCar("Toyota Hybrid Yaris", 3.75, 0.35, 0)
-    renaultClio = new MyWheelsCar("Renault Clio", 3.75, 0.35, 0)
-    opelCorsa = new MyWheelsCar("Opel Corsa", 3.75, 0.35, 0)
-    nissanMicra = new MyWheelsCar("Nissan Micra", 3.75, 0.35, 0)
-    volkswagenPolo = new MyWheelsCar("Volkswagen Polo", 3.75, 0.35, 0)
-    miniOne = new MyWheelsCar("Mini One", 3.75, 0.35, 0)
+    citroenC3 = new MyWheelsCar("Citroën C3", 3.75, 0.40, 0)
+    toyotaYarishybrid = new MyWheelsCar("Toyota Hybrid Yaris", 3.75, 0.40, 0)
+    renaultClio = new MyWheelsCar("Renault Clio", 3.75, 0.40, 0)
+    opelCorsa = new MyWheelsCar("Opel Corsa", 3.75, 0.40, 0)
+    nissanMicra = new MyWheelsCar("Nissan Micra", 3.75, 0.40, 0)
+    miniOne = new MyWheelsCar("Mini One", 3.75, 0.40, 0)
     
-    renaultZoe = new MyWheelsCar("Renault ZOE", 3.75, 0.33, 0)
-    nissanLeaf = new MyWheelsCar("Nissan Leaf", 3.75, 0.33, 0)
-    peugeotE208 = new MyWheelsCar("Peugeot E-208", 3.75, 0.33, 0)
-    miniCooperelectric = new MyWheelsCar("Mini Cooper Electric", 3.75, 0.33, 0)
+    renaultZoe = new MyWheelsCar("Renault ZOE", 3.75, 0.40, 0)
+    nissanLeaf = new MyWheelsCar("Nissan Leaf", 3.75, 0.40, 0)
+    peugeotE208 = new MyWheelsCar("Peugeot E-208", 3.75, 0.40, 0)
     
-    fordFocuswagon = new MyWheelsCar("Ford Focus Wagon", 4.25, 0.38, 0)
-    opelAstratourer = new MyWheelsCar("Opel Astra Tourer", 4.25, 0.38, 0)
+    fordFocuswagon = new MyWheelsCar("Ford Focus Wagon", 4.25, 0.43, 0)
+    opelAstratourer = new MyWheelsCar("Opel Astra Tourer", 4.25, 0.43, 0)
     
-    hyundaiKona = new MyWheelsCar("Hyundai Kona", 4.25, 0.36, 0)
-    kiaEniro = new MyWheelsCar("Kia e-Niro", 4.25, 0.36, 0)
-    aiwaysU5 = new MyWheelsCar("Aiways U5", 4.25, 0.36, 0)
+    hyundaiKona = new MyWheelsCar("Hyundai Kona", 4.25, 0.43, 0)
+    kiaEniro = new MyWheelsCar("Kia e-Niro", 4.25, 0.43, 0)
+    mgMg4 = new MyWheelsCar("MG MG4", 4.25, 0.43, 0)
+    volkswagenID3 = new MyWheelsCar("Volkswagen ID.3", 4.25, 0.43, 0)
+    MWbmwI3  = new MyWheelsCar("BMW i3", 4.25, 0.43, 0)
+    ds3Etense = new MyWheelsCar("DS 3 E-Tense", 4.25, 0.43, 0)
     
 #     define cars array
-    cars = [fiat500, toyotaAygo, citroenC1, skodaCitigoe, seatMiielectric, citroenC3, toyotaYarishybrid, renaultClio, opelCorsa, nissanMicra, volkswagenPolo, miniOne, renaultZoe, nissanLeaf, peugeotE208, miniCooperelectric, fordFocuswagon, opelAstratourer, hyundaiKona, kiaEniro, aiwaysU5]
+    cars = [fiat500, toyotaAygo, citroenC1,
+            skodaCitigoe, seatMiielectric, 
+            citroenC3, toyotaYarishybrid, renaultClio, opelCorsa, nissanMicra, miniOne,
+            renaultZoe, nissanLeaf, peugeotE208, 
+            fordFocuswagon, opelAstratourer, 
+            hyundaiKona, kiaEniro, mgMg4, volkswagenID3, MWbmwI3, ds3Etense]
     
     return cars
 
@@ -96,7 +102,7 @@ instantiateMyWheelsCars = ->
 class SixtShareCar extends Car
     constructor: (@id, @feeminutes) ->
         @vendor = "Sixt Share"
-        @feekilometers = 0.34 # irrespective of car/package when going beyond included kilometers
+        @feekilometers = 0.39 # irrespective of car/package when going beyond included kilometers
         @feeextratime = 0.28 # irrespective of car when going beyond package time
         @includedkilometers = 200 # if not using package & irrespective of car/package
         @distancePackages = []
@@ -175,44 +181,45 @@ instantiateSixtShareCars = ->
 #    define cars
     
     # budget cars array
-    seatMii = new SixtShareCar("Seat Mii", 0.27)
-    skodaCitigo = new SixtShareCar("Skoda CITIgo", 0.27)
+    nissanLeaf = new SixtShareCar("Nissan Leaf", 0.30)
+    peugeot2008e = new SixtShareCar("Peugeot 2008-e", 0.30)
+    opelMokkae = new SixtShareCar("Opel Mokka-e", 0.30)
     
-    budgetcars = [seatMii, skodaCitigo]
+    budgetcars = [nissanLeaf, peugeot2008e, opelMokkae]
     for budget in budgetcars
         # added backwards for easier math
-        budget.addTimePackage("7 Dagen Pakket", 209, 7, "days", 600)
-        budget.addTimePackage("3 Dagen Pakket", 95, 3, "days", 400)
-        budget.addTimePackage("1 Dag Pakket", 69, 1, "days", 200)
-        budget.addTimePackage("6 Uur Pakket", 49, 6, "hours", 120)
-        budget.addTimePackage("3 Uur Pakket", 32, 3, "hours", 80)
+        budget.addTimePackage("7 Dagen Pakket", 379, 7, "days", 600)
+        budget.addTimePackage("3 Dagen Pakket", 179, 3, "days", 400)
+        budget.addTimePackage("2 Dagen Pakket", 129, 2, "days", 300)
+        budget.addTimePackage("1 Dag Pakket", 109, 1, "days", 200)
+        budget.addTimePackage("6 Uur Pakket", 65, 6, "hours", 120)
+        budget.addTimePackage("3 Uur Pakket", 45, 3, "hours", 80)
         
     # standard cars array
-    nissanLeaf = new SixtShareCar("Nissan Leaf", 0.29)
-    hyundaiKona = new SixtShareCar("Hyundai Kona", 0.29)
-    ds3crossback = new SixtShareCar("DS 3 Crossback", 0.29)
+    bmwi3 = new SixtShareCar("BMW i3", 0.32)
     
-    standardcars = [nissanLeaf,hyundaiKona,ds3crossback]
+    standardcars = [bmwi3]
     for standard in standardcars
         # added backwards for easier math
-        standard.addTimePackage("7 Dagen Pakket", 229, 7, "days", 600)
-        standard.addTimePackage("3 Dagen Pakket", 109, 3, "days", 400)
-        standard.addTimePackage("1 Dag Pakket", 79, 1, "days", 200)
-        standard.addTimePackage("6 Uur Pakket", 59, 6, "hours", 120)
-        standard.addTimePackage("3 Uur Pakket", 35, 3, "hours", 80)
-    
+        standard.addTimePackage("7 Dagen Pakket", 379, 7, "days", 600)
+        standard.addTimePackage("3 Dagen Pakket", 179, 3, "days", 400)
+        standard.addTimePackage("2 Dagen Pakket", 129, 2, "days", 300)
+        standard.addTimePackage("1 Dag Pakket", 109, 1, "days", 200)
+        standard.addTimePackage("6 Uur Pakket", 69, 6, "hours", 120)
+        standard.addTimePackage("3 Uur Pakket", 49, 3, "hours", 80)     
+   
     # premium cars array
-    bmwi3 = new SixtShareCar("BMW i3", 0.31)
-    aiwaysU5 = new SixtShareCar("Aiways U5", 0.31)
-    volkswagenGolf = new SixtShareCar("Volkswagen Golf", 0.31)
-    premiumcars = [bmwi3,aiwaysU5,volkswagenGolf]
+    miniMini = new SixtShareCar("Mini MINI", 0.39)
+    
+    premiumcars = [miniMini]
     for premium in premiumcars
         # added backwards for easier math
-        premium.addTimePackage("7 Dagen Pakket", 249, 7, "days", 600)
-        premium.addTimePackage("3 Dagen Pakket", 119, 3, "days", 400)
-        premium.addTimePackage("1 Dag Pakket", 89, 1, "days", 200)
-        premium.addTimePackage("6 Uur Pakket", 69, 6, "hours", 120)
-        premium.addTimePackage("3 Uur Pakket", 45, 3, "hours", 80)
+        premium.addTimePackage("7 Dagen Pakket", 429, 7, "days", 600)
+        premium.addTimePackage("3 Dagen Pakket", 209, 3, "days", 400)
+        premium.addTimePackage("2 Dagen Pakket", 145, 2, "days", 300)
+        premium.addTimePackage("1 Dag Pakket", 125, 1, "days", 200)
+        premium.addTimePackage("6 Uur Pakket", 75, 6, "hours", 120)
+        premium.addTimePackage("3 Uur Pakket", 54, 3, "hours", 80)
     
 #    define cars array
     cars = [budgetcars..., standardcars..., premiumcars...]
@@ -220,11 +227,13 @@ instantiateSixtShareCars = ->
     # add kilometer packages
     for car in cars
         # added backwards for easier math
-        car.addDistancePackage("500 Kilometer Pakket", 110, 500)
-        car.addDistancePackage("250 Kilometer Pakket", 60, 250)
-        car.addDistancePackage("150 Kilometer Pakket", 39, 150)
-        car.addDistancePackage("100 Kilometer Pakket", 27, 100)
-        car.addDistancePackage("50 Kilometer Pakket", 14, 50)
+        car.addDistancePackage("1000 Kilometer Pakket", 300, 1000)
+        car.addDistancePackage("750 Kilometer Pakket", 225, 750)
+        car.addDistancePackage("500 Kilometer Pakket", 155, 500)
+        car.addDistancePackage("250 Kilometer Pakket", 80, 250)
+        car.addDistancePackage("150 Kilometer Pakket", 48, 150)
+        car.addDistancePackage("100 Kilometer Pakket", 33, 100)
+        car.addDistancePackage("50 Kilometer Pakket", 16, 50)
     
     return cars
 

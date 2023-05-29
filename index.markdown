@@ -12,7 +12,7 @@ layout: default
 
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
-**Let op!** Sommige providers rekenenen met variable tarieven (op basis van vraag/aanbod en locatie). De tarieven in deze applicatie zijn dus vooral een indicatie. Daadwerkelijke kosten kunnen verschillen. *Laatste prijsupdate 30 januari 2022.*
+**Let op!** Sommige providers rekenenen met variable tarieven (op basis van vraag/aanbod en locatie). De tarieven in deze applicatie zijn dus vooral een indicatie. Daadwerkelijke kosten kunnen verschillen. *Laatste model- en prijsupdate 29 mei 2023.*
 
 <div class="grid-container">
     <div class="grid-child">

@@ -12,7 +12,7 @@ layout: default
 
  <script src="{{ "/assets/js/deelauto.js" | relative_url }}"></script>
 
-**Let op!** Sommige providers rekenenen met variable tarieven (op basis van vraag/aanbod en locatie). De tarieven in deze applicatie zijn dus vooral een indicatie. Daadwerkelijke kosten kunnen verschillen. *Laatste model- en prijsupdate 29 mei 2023.*
+**Let op!** Sommige providers rekenenen met variable tarieven (op basis van vraag/aanbod en locatie). De tarieven in deze applicatie zijn dus vooral een indicatie. Daadwerkelijke kosten kunnen verschillen. *Laatste model- en prijsupdate 13 oktober 2023.*
 
 <div class="grid-container">
     <div class="grid-child">
@@ -46,7 +46,7 @@ layout: default
 
 <div id="customization" class="customized">
     <div id="customized_sixt" class="hidden">
-         <p><em>De geselecteerde deelauto provider gebruikt vaak variable tarieven. Gebruik het menu hieronder om eventueel zelf de tarieven in te stellen</em></p>
+         <p><em>De geselecteerde deelauto provider gebruikt vaak variable tarieven (ook voor pakketen!). Gebruik het menu hieronder om eventueel zelf de tarieven in te stellen</em></p>
         <br>    
         <div class="toggle_container">
             <div class="toggle-child">
@@ -88,7 +88,7 @@ layout: default
 
 Deze rit kost ongeveer: <em><span id="journey_price"></span></em>
 
-De volgende kortingen en/of pakketen zijn actief:
+De volgende kortingen en/of pakketten zijn actief:
 <em><span id="journey_discounts"></span></em>
   
 <div class="toggle_container">

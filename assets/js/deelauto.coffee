@@ -33,7 +33,7 @@ class MyWheelsCar extends Car
             discountedkilometers = @feekilometers * (1 - usedDiscount/100)
             discounts = switch
                 when usedDiscount is 15 then usedDiscount + "% korting (Plus)" 
-                when usedDiscount is 35 then usedDiscount + "% korting (Pro)"
+                when usedDiscount is 30 then usedDiscount + "% korting (Pro)"
                 else usedDiscount + "% korting" 
         
         # compute time component
@@ -334,7 +334,7 @@ handleSixtOverrides = (car, journey) ->
 handleMyWheelsOverrides = (car, journey) ->
     journeyPrice = switch
         when $('#mywheels_subscription').val() is "plus" then car.computeJourneyPrice(journey, 15) # 15% discount
-        when $('#mywheels_subscription').val() is "pro" then car.computeJourneyPrice(journey, 35) # 35% discount
+        when $('#mywheels_subscription').val() is "pro" then car.computeJourneyPrice(journey, 30) # 30% discount
         else car.computeJourneyPrice(journey) # no discount
     return journeyPrice
     
